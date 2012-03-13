@@ -1,4 +1,4 @@
-class ActiveRecord::Base
+ActiveRecord::Base.class_eval do
   class << self
     def symbol
       self.name.underscore.to_sym
@@ -20,7 +20,7 @@ class ActiveRecord::Base
   end
 end
 
-class ActiveRecord::Associations::AssociationProxy
+ActiveRecord::Associations::AssociationProxy.class_eval do
   def target_class_symbol
     self.symbol
   end

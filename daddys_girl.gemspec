@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'daddys_girl'
-  s.version     = '0.2'
+  s.version     = '0.3'
   s.date        = '2020-03-13'
   s.summary     = "[Object] Daddy's [Factory] Girl"
   s.description = "Rubygem to provide object_daddy-like syntax for factory_girl"
