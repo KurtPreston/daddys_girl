@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "Rubygem to provide object_daddy-like syntax for factory_girl"
   s.authors     = ["Kurt Preston"]
   s.email       = 'development@inventables.com'
-  s.files       = ["lib/object_daddy.rb"]
+  s.files       = ["lib/daddys_girl.rb"]
   s.homepage    =
     'https://github.com/inventables/daddys_girl'
 end
