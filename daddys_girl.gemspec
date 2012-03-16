@@ -1,14 +1,20 @@
-Gem::Specification.new do |s|
-  s.name        = 'daddys_girl'
-  s.version     = '0.4'
-  s.date        = '2020-03-13'
-  s.summary     = "[Object] Daddy's [Factory] Girl"
-  s.description = "Rubygem to provide object_daddy-like syntax for factory_girl"
-  s.authors     = ["Kurt Preston"]
-  s.email       = 'development@inventables.com'
-  s.files       = ["lib/daddys_girl.rb"]
-  s.add_runtime_dependency "activerecord", [">= 3.0", "<= 3.2"]
-  s.add_runtime_dependency "factory_girl"
-  s.homepage    =
-    'https://github.com/inventables/daddys_girl'
+# -*- encoding: utf-8 -*-
+require File.expand_path('../lib/daddys_girl/version', __FILE__)
+
+Gem::Specification.new do |gem|
+  gem.authors       = ["Kurt Preston"]
+  gem.email         = ["development@inventables.com"]
+  gem.description   = "Rubygem to provide object_daddy-like syntax for factory_girl"
+  gem.summary       = "[Object] Daddy's [Factory] Girl"
+  gem.homepage      = "https://github.com/inventables/daddys_girl"
+
+  gem.files         = `git ls-files`.split($\)
+  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.name          = "daddys_girl"
+  gem.require_paths = ["lib"]
+  gem.version       = DaddysGirl::VERSION
+  gem.add_runtime_dependency "activerecord", [">= 3.0", "<= 3.2"]
+  gem.add_runtime_dependency "factory_girl"
 end
+
