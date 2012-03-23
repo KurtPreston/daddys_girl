@@ -14,8 +14,8 @@ Gem::Specification.new do |gem|
   gem.name          = "daddys_girl"
   gem.require_paths = ["lib"]
   gem.version       = DaddysGirl::VERSION
-  gem.add_runtime_dependency "activerecord", "~> 3.0.0"
-  gem.add_runtime_dependency "factory_girl", "~> 2.0"
+  gem.add_dependency "activerecord", "~> 3.0.0"
+  gem.add_dependency "factory_girl", "~> 2.0"
   gem.add_development_dependency "rspec", "~> 2.0"
 end
 

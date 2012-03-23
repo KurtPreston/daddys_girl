@@ -38,5 +38,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord (~> 3.0.0)
   daddys_girl!
+  factory_girl (~> 2.0)
   rspec (~> 2.0)
