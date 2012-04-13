@@ -2,7 +2,6 @@ require "rubygems"
 require "bundler/setup"
 Bundler.require(:default)
 require 'active_record'
-require 'daddys_girl'
 
 module DefineConstantMacros
   def define_class(path, base = Object, &block)
