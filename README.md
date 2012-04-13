@@ -20,6 +20,7 @@ Or install it yourself as:
 First, you must add a class definition to the Factory Girl factories file (normally spec/factories.rb)
 
 Methods:
+
 1. ```ClassName.spawn(params)```: creates an object, but does not save it
 2. ```ClassName.generate(params)```: creates an object and attempts to save it
 3. ```ClassName.generate!(params)```: creates an object, and throws an error if it can not save it
