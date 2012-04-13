@@ -16,14 +16,14 @@ describe DaddysGirl do
     end
   end
 
-  describe "ActiveRecord::Base.spawn" do
+  describe "ActiveRecord::Base#spawn" do
     it "creates a new object without saving" do
       TestClass.spawn(:name => "Test Name").name.should == "Test Name"
       TestClass.spawn.id.should be_nil
     end
   end
 
-  describe "ActiveRecord::Base.generate" do
+  describe "ActiveRecord::Base#generate" do
     context "if the object is valid" do
       it "creates a new object and saves" do
         TestClass.generate(:name => "Test Name").name.should == "Test Name"
@@ -38,7 +38,7 @@ describe DaddysGirl do
     end
   end
 
-  describe "ActiveRecord::Base.generate!" do
+  describe "ActiveRecord::Base#generate!" do
     context "if the object is valid" do
       it "creates a new object and saves" do
         TestClass.generate!(:name => "Test Name").name.should == "Test Name"
@@ -54,6 +54,41 @@ describe DaddysGirl do
         rescue ActiveRecord::RecordInvalid
           true
         end.should be_true
+      end
+    end
+  end
+
+  describe "ActiveRecord::Associations::AssociationProxy.spawn" do
+    it "creates a new object without saving" do
+      TestClass.spawn(:name => "Test Name").name.should == "Test Name"
+      TestClass.spawn.id.should be_nil
+    end
+  end
+
+  describe "ActiveRecord::Associations::AssociationProxy.generate" do
+    context "if the object is valid" do
+      it "creates a new object and saves" do
+        pending
+      end
+    end
+
+    context "if the object is not valid" do
+      it "creates a new object without saving" do
+        pending
+      end
+    end
+  end
+
+  describe "ActiveRecord::Associations::AssociationProxy.generate!" do
+    context "if the object is valid" do
+      it "creates a new object and saves" do
+        pending
+      end
+    end
+
+    context "if the object is not valid" do
+      it "throws an error" do
+        pending
       end
     end
   end
