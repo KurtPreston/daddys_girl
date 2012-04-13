@@ -7,13 +7,15 @@ ActiveRecord::Base.class_eval do
     end
 
     def generate(attributes = {})
-      FactoryGirl.create(self.symbol, attributes)
+      begin
+        FactoryGirl.create(self.symbol, attributes)
+      rescue ActiveRecord::RecordInvalid
+        FactoryGirl.build(self.symbol, attributes)
+      end
     end
 
     def generate!(attributes = {})
-      FactoryGirl.create(self.symbol, attributes).tap do |obj|
-        raise obj.errors.inspect unless obj.errors.empty?
-      end
+      FactoryGirl.create(self.symbol, attributes)
     end
 
     def spawn(attributes = {})
@@ -35,9 +37,12 @@ ActiveRecord::Associations::AssociationProxy.class_eval do
 
   def generate!(attributes = {})
     attributes = attributes.merge(association_attribute)
-    FactoryGirl.create(target_class_symbol, attributes).tap do |obj|
-      raise obj.errors.inspect unless obj.errors.empty?
+    begin
+      FactoryGirl.create(target_class_symbol, attributes)
+    rescue ActiveRecord::RecordInvalid
+      FactoryGirl.spawn(target_class_symbol, attributes)
     end
+
   end
 
   def spawn(attributes = {})

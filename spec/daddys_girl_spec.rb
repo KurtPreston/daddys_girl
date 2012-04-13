@@ -11,6 +11,9 @@ describe DaddysGirl do
 
   before(:each) do
     define_model('TestClass', {:name => :string})
+    TestClass.class_eval do
+      validates_format_of :name, :with => /^[^!]+$/
+    end
   end
 
   describe "ActiveRecord::Base.spawn" do
@@ -30,7 +33,7 @@ describe DaddysGirl do
 
     context "if the object is not valid" do
       it "creates a new object without saving" do
-        pending
+        TestClass.generate(:name => 'Invalid!').id.should be_nil
       end
     end
   end
@@ -45,7 +48,12 @@ describe DaddysGirl do
 
     context "if the object is not valid" do
       it "throws an error" do
-        pending
+        begin
+          TestClass.generate!(:name => "Invalid!")
+          false
+        rescue ActiveRecord::RecordInvalid
+          true
+        end.should be_true
       end
     end
   end
