@@ -60,8 +60,7 @@ describe DaddysGirl do
 
   describe "ActiveRecord::Associations::AssociationProxy.spawn" do
     it "creates a new object without saving" do
-      TestClass.spawn(:name => "Test Name").name.should == "Test Name"
-      TestClass.spawn.id.should be_nil
+      spawn
     end
   end
 
