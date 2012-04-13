@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = DaddysGirl::VERSION
   gem.add_dependency "activerecord", "~> 3.0.0"
-  gem.add_dependency "factory_girl", "~> 2.0"
+  gem.add_dependency "factory_girl", ">= 2.0"
   gem.add_development_dependency "rspec", "~> 2.0"
   gem.add_development_dependency "sqlite3-ruby"
 end
