@@ -6,14 +6,19 @@ describe DaddysGirl do
       factory :test_class do
         name 'Test Name'
       end
+
+      factory :test_association
     end
   end
 
   before(:each) do
     define_model('TestClass', {:name => :string})
+    define_model('TestAssociation', {})
     TestClass.class_eval do
       validates_format_of :name, :with => /^[^!]+$/
+      has_many :test_associations
     end
+    @test_object = TestClass.new
   end
 
   describe "ActiveRecord::Base#spawn" do
@@ -60,7 +65,8 @@ describe DaddysGirl do
 
   describe "ActiveRecord::Associations::AssociationProxy.spawn" do
     it "creates a new object without saving" do
-      spawn
+      @test_object.test_associations.spawn.class.should == TestAssociation
+      @test_object.test_associations.spawn.id.should be_nil
     end
   end
 

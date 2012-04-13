@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    daddys_girl (0.5.0)
+    daddys_girl (0.6.0)
       activerecord (~> 3.0.0)
       factory_girl (~> 2.0)
 
