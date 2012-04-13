@@ -59,4 +59,4 @@ module DaddysGirl
   end
 end
 
-ActiveRecord::Associations::AssociationProxy.send(:include, DaddysGirl::AssocationModel) if defined?(ActiveRecord)
+ActiveRecord::Associations::AssociationProxy.send(:include, DaddysGirl::AssociationModel) if defined?(ActiveRecord)
