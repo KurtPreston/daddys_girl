@@ -32,17 +32,16 @@ ActiveRecord::Associations::AssociationProxy.class_eval do
 
   def generate(attributes = {})
     attributes = attributes.merge(association_attribute)
-    FactoryGirl.create(target_class_symbol, attributes)
+    begin
+      FactoryGirl.create(target_class_symbol, attributes)
+    rescue ActiveRecord::RecordInvalid
+      FactoryGirl.build(target_class_symbol, attributes)
+    end
   end
 
   def generate!(attributes = {})
     attributes = attributes.merge(association_attribute)
-    begin
-      FactoryGirl.create(target_class_symbol, attributes)
-    rescue ActiveRecord::RecordInvalid
-      FactoryGirl.spawn(target_class_symbol, attributes)
-    end
-
+    FactoryGirl.create(target_class_symbol, attributes)
   end
 
   def spawn(attributes = {})
