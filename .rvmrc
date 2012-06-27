@@ -1,3 +1,3 @@
-rvm use --create 1.9.2@daddys_girl
+rvm use --create 1.9.3
 echo "Loading bundle..."
 bundle install --without=production
