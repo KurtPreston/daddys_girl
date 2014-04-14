@@ -18,22 +18,32 @@ describe DaddysGirl do
     define_model('TestAssociation', {:name => :string, :test_class_id => :integer})
 
     TestClass.class_eval do
-      validates_format_of :name, :with => /^[^!]+$/
+      validates_format_of :name, :with => /[^!]+\z/
       has_many :test_associations
     end
     TestAssociation.class_eval do
-      validates_format_of :name, :with => /^[^!]+$/
+      validates_format_of :name, :with => /[^!]+\z/
       belongs_to :test_class
     end
 
     @test_object = TestClass.create(:name => "Valid")
   end
 
-  describe "ActiveRecord::Base#spawn" do
+  describe "Validate test classes" do
+    it "TestClass should validate name format" do
+      TestClass.new(name: "Invalid!").should_not be_valid
+    end
+
+    it "TestAssociation should validate name format" do
+      TestAssociation.new(name: "Invalid!").should_not be_valid
+    end
+  end
+
+  describe "ActiveRecord::Base#factory_spawn" do
     it "creates a new object without saving" do
-      TestClass.spawn.class.should == TestClass
-      TestClass.spawn(:name => "Test Name").name.should == "Test Name"
-      TestClass.spawn.id.should be_nil
+      TestClass.factory_spawn.class.should == TestClass
+      TestClass.factory_spawn(:name => "Test Name").name.should == "Test Name"
+      TestClass.factory_spawn.id.should be_nil
     end
   end
 
@@ -72,12 +82,12 @@ describe DaddysGirl do
     end
   end
 
-  describe "ActiveRecord::Associations::AssociationProxy.spawn" do
+  describe "ActiveRecord::Associations::AssociationProxy.factory_spawn" do
     it "creates a new object without saving" do
-      @test_object.test_associations.spawn.class.should == TestAssociation
-      @test_object.test_associations.spawn(:name => 'Test Association').name.should == 'Test Association'
-      @test_object.test_associations.spawn.id.should be_nil
-      @test_object.test_associations.spawn.test_class.should == @test_object.reload
+      @test_object.test_associations.factory_spawn.class.should == TestAssociation
+      @test_object.test_associations.factory_spawn(:name => 'Test Association').name.should == 'Test Association'
+      @test_object.test_associations.factory_spawn.id.should be_nil
+      @test_object.test_associations.factory_spawn.test_class.should == @test_object.reload
     end
   end
 

@@ -1,3 +1,2 @@
 *.gem
 .bundle/*
-spec/test.db

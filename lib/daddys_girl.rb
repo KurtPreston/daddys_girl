@@ -8,17 +8,17 @@ ActiveRecord::Base.class_eval do
 
     def generate(attributes = {})
       begin
-        FactoryGirl.create(self.symbol, attributes)
+        FactoryGirl.create(self.symbol, attributes).reload
       rescue ActiveRecord::RecordInvalid
         FactoryGirl.build(self.symbol, attributes)
       end
     end
 
     def generate!(attributes = {})
-      FactoryGirl.create(self.symbol, attributes)
+      FactoryGirl.create(self.symbol, attributes).reload
     end
 
-    def spawn(attributes = {})
+    def factory_spawn(attributes = {})
       FactoryGirl.build(self.symbol, attributes)
     end
   end
@@ -44,7 +44,7 @@ if ActiveRecord::VERSION::MAJOR == 3 && ActiveRecord::VERSION::MINOR == 0
       FactoryGirl.create(target_class_symbol, attributes)
     end
 
-    def spawn(attributes = {})
+    def factory_spawn(attributes = {})
       attributes = attributes.merge(association_attribute)
       FactoryGirl.build(target_class_symbol, attributes)
     end
@@ -61,7 +61,9 @@ if ActiveRecord::VERSION::MAJOR == 3 && ActiveRecord::VERSION::MINOR == 0
 end
 
 
-if ActiveRecord::VERSION::MAJOR == 3 && ActiveRecord::VERSION::MINOR >= 1
+if (ActiveRecord::VERSION::MAJOR == 3 && ActiveRecord::VERSION::MINOR >= 1) ||
+  ActiveRecord::VERSION::MAJOR >= 4
+
   ActiveRecord::Relation.class_eval do
     def target_class_symbol
       self.symbol
@@ -81,10 +83,9 @@ if ActiveRecord::VERSION::MAJOR == 3 && ActiveRecord::VERSION::MINOR >= 1
       FactoryGirl.create(target_class_symbol, attributes)
     end
 
-    def spawn(attributes = {})
+    def factory_spawn(attributes = {})
       attributes = attributes.merge(where_values_hash)
       FactoryGirl.build(target_class_symbol, attributes)
     end
-
   end
 end
