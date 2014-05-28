@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["github@kurtpreston.com"]
   gem.description   = "Rubygem to provide object_daddy-like syntax for factory_girl"
   gem.summary       = "[Object] Daddy's [Factory] Girl"
-  gem.homepage      = "https://github.com/inventables/daddys_girl"
+  gem.homepage      = "https://github.com/KurtPreston/daddys_girl"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
